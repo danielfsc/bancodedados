@@ -9,9 +9,9 @@ USE avaliacao2;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` INT AUTO_INCREMENT,
   `email` VARCHAR(100) NOT NULL UNIQUE,
-  `password` TINYTEXT NOT NULL,
+  `password` TINYTEXT NULL,
   `nomeCompleto` VARCHAR(100) NULL,
-  `dataRegistro` DATE NOT NULL,
+  `dataRegistro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `imagem` BLOB NULL,
   PRIMARY KEY (`id`)
 );
@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `conteudos_dos_planos` (
 CREATE TABLE IF NOT EXISTS `comentarios` (
   `id` INT AUTO_INCREMENT,
   `texto` TEXT NOT NULL,
+  `data` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `plano_id` INT NULL,
   `comentario_id` INT NULL,
   `usuario_id` INT NOT NULL,
