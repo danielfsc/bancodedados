@@ -1,0 +1,32 @@
+version: "3.1"
+services:
+  curso_mysql:
+    image: mysql:5.6
+    container_name: curso_mysql
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ./mysql_db:/var/lib/mysql
+    env_file:
+      - mysql.env
+    command: mysqld --character-set-server=utf8 --init-connect='SET NAMES UTF8;'
+    ports:
+      - "3306:3306"
+  curso_phpmyadmin:
+    image: phpmyadmin
+    container_name: curso_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: curso_mysql
+      PMA_USER: root
+      PMA_PASSWORD: 123456789
+    ports:
+      - "8080:80"
+  sqlite3:
+    image: nouchka/sqlite3:latest
+    container_name: sqlite3
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./sqlite/:/root/db/
+    
